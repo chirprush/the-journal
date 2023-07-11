@@ -1,0 +1,45 @@
+I'd like to think that this is a decently interesting question that stems from
+some other stuff I've worked with in differential equations, we sometimes have
+ODEs of the form
+\[
+    a_0y + a_1y' + \cdots + a_n y^{\left( n \right)} = 0
+.\]
+These are readily solveable using a method called the \textit{characteristic
+polynomial}, \MarginComment{As we'll see later, there will be a few analogues
+to these differential equations and characteristic polynomials in this
+solution. Connections in math are fun!} which I won't get into too much here
+(but perhaps another time?), where essentially we just assume an exponential
+solution utilizing the roots of a similar looking polynomial.
+
+Here's where sort of my inspiration comes in. Instead of looking at
+differential equations that have characteristic polynomials or potential
+polynomials in \( x \), what if we look at differential equations that are
+\textit{polynomials in \( y \)}?
+
+\subsection{Polynomials in \( y \)}
+
+\begin{blackbox}
+    \begin{problem}
+        What can we say about differential equations of the following form and
+        their solutions?
+        \[
+            \frac{dy}{dx} = a_0 + a_1 y + \cdots + a_n y^n
+        .\]
+    \end{problem}
+\end{blackbox}
+
+Because the right side is written completely in terms of \( y \), we can
+recognize that this is simply a first order separable differential equation.
+With this, we can move the polynomial to the left hand side by dividing and
+then simply just integrate with respect to y. Then our problem lies in finding
+out how to integrate this general rational function. Now where have we heard
+that?
+
+Using the same result, \MarginComment{I was quite excited when I derived it
+myself, so I've used it quite a bit in various places. It's quite fun.} from
+the previous journal entry, we can integrate this rational function assuming we
+know the roots of the polynomial in \( y \), which we will denote as \( y_1,
+y_2, \ldots, y_n \). Thus we have that
+\[
+    \frac{1}{a_n \left( y - y_1 \right) \left( y - y_2 \right) \cdots \left( y - y_n \right)} \cdot \frac{dy}{dx} = 1
+.\]

@@ -1,0 +1,154 @@
+Here's a cute little problem that I actually had to solve while programming a
+Rubik's cube in 3D. While rotating the cube in small steps, we can keep a
+matrix in the background that keeps track of these rotations applied to the
+cube in case we need to invert them. \MarginComment{Specifically, when rotating
+individual faces of the cube, we need to invert the cube rotations, apply our
+correct face rotaion around some axis, and then reapply the cube rotation. It's
+pretty fun actually.} The problem with this, however, is that we gradually run
+into floating point issues and other numerical differences, resulting in the
+rotation applied to the cube and the accumulated rotation falling "out of sync"
+so to speak.
+
+Now I could have gone hunting for optimizations and other ways to try and
+duct-tape a solution together, but really what I needed was just a fast and
+simple way of getting the rotation. \MarginComment{For reference, this was done
+in the CMU CS Academy\texttrademark\ portal, so the project was 1) really not
+performant and 2) on a deadline.} After a short while of thinking, there's
+actually a pretty nice solution.
+
+In addition to the cube, what if we stored some extra points and looked at how
+they were transformed under the rotations? If we had enough points, could we
+uniquely determine our rotation \( R \)? Seeing as how I'm writing this, the
+answer is indeed yes.
+
+In particular, say we have \( 3 \) three-dimensional vectors \( \bvec{u} \), \( \bvec{v} \), and \( \bvec{w} \) along with their respective transformed vectors under our rotation \( R \): \( \bvec{u}' \), \( \bvec{v}' \), and \( \bvec{w}' \). Then we really have these three cases:
+\begingroup
+\newcommand{\point}[1]{\ensuremath{\begin{bmatrix} #1_1 \\ #1_2 \\ #1_3 \end{bmatrix}}}
+\newcommand{\R}{\ensuremath{\begin{bmatrix} R_{1,1} & R_{1,2} & R_{1,2} \\ R_{2,1} & R_{2,2} & R_{2,3} \\ R_{3,1} & R_{3,2} & R_{3,3} \end{bmatrix}}}
+\[
+    R \bvec{u} = \bvec{u}' \qquad R \bvec{v} = \bvec{v}' \qquad R \bvec{w} = \bvec{w}'
+\]
+In order to do something with this, we first expand \( R \) as the following
+and then decompose matrix equation for each point into three linear equations.
+\[
+    R = \R
+.\]
+
+For vectors \( \bvec{u} \), \( \bvec{v} \), and \( \bvec{w} \),
+
+\begin{tikzpicture}[node distance=4cm]
+    \node (lhs) { \(
+        \begin{aligned}
+            \R \point{\bvec{u}} = \point{\bvec{u'}}
+        \end{aligned}
+    \) };
+    \node[right=of lhs] (rhs) { \(
+        \begin{aligned}
+             R_{1,1} \bvec{u}_1 + R_{1,2} \bvec{u}_2 + R_{1,3} \bvec{u}_3 &= \bvec{u'}_1 \\
+             R_{2,1} \bvec{u}_1 + R_{2,2} \bvec{u}_2 + R_{2,3} \bvec{u}_3 &= \bvec{u'}_2 \\
+             R_{3,1} \bvec{u}_1 + R_{3,2} \bvec{u}_2 + R_{3,3} \bvec{u}_3 &= \bvec{u'}_3
+        \end{aligned}
+    \) };
+    \draw[->, semithick] (lhs.east) -- (rhs.west);
+\end{tikzpicture}
+
+\begin{tikzpicture}[node distance=4cm]
+    \node (lhs) { \(
+        \begin{aligned}
+            \R \point{\bvec{v}} = \point{\bvec{v'}}
+        \end{aligned}
+    \) };
+    \node[right=of lhs] (rhs) { \(
+        \begin{aligned}
+             R_{1,1} \bvec{v}_1 + R_{1,2} \bvec{v}_2 + R_{1,3} \bvec{v}_3 &= \bvec{v'}_1 \\
+             R_{2,1} \bvec{v}_1 + R_{2,2} \bvec{v}_2 + R_{2,3} \bvec{v}_3 &= \bvec{v'}_2 \\
+             R_{3,1} \bvec{v}_1 + R_{3,2} \bvec{v}_2 + R_{3,3} \bvec{v}_3 &= \bvec{v'}_3
+        \end{aligned}
+    \) };
+    \draw[->, semithick] (lhs.east) -- (rhs.west);
+\end{tikzpicture}
+
+\begin{tikzpicture}[node distance=4cm]
+    \node (lhs) { \(
+        \begin{aligned}
+            \R \point{\bvec{w}} = \point{\bvec{w'}}
+        \end{aligned}
+    \) };
+    \node[right=of lhs] (rhs) { \(
+        \begin{aligned}
+             R_{1,1} \bvec{w}_1 + R_{1,2} \bvec{w}_2 + R_{1,3} \bvec{w}_3 &= \bvec{w'}_1 \\
+             R_{2,1} \bvec{w}_1 + R_{2,2} \bvec{w}_2 + R_{2,3} \bvec{w}_3 &= \bvec{w'}_2 \\
+             R_{3,1} \bvec{w}_1 + R_{3,2} \bvec{w}_2 + R_{3,3} \bvec{w}_3 &= \bvec{w'}_3
+        \end{aligned}
+    \) };
+    \draw[->, semithick] (lhs.east) -- (rhs.west);
+\end{tikzpicture}
+\endgroup
+
+Notice now that we have three relations for each three rows of coefficients in \( R \). This let's us now rearrange the nine equations we have as the following three systems of three equations, which we can again put back into matrix form.
+\begingroup
+\newcommand{\point}[1]{\ensuremath{\begin{bmatrix} #1_1 \\ #1_2 \\ #1_3 \end{bmatrix}}}
+\newcommand{\pointsub}[2]{\ensuremath{\begin{bmatrix} #1_{#2,1} \\ #1_{#2,2} \\ #1_{#2,3}  \end{bmatrix}}}
+\newcommand{\A}{\ensuremath{\begin{bmatrix} \bvec{u}_1 & \bvec{u}_2 & \bvec{u}_3 \\ \bvec{v}_1 & \bvec{v}_2 & \bvec{v}_3 \\ \bvec{w}_1 & \bvec{w}_2 & \bvec{w}_3 \end{bmatrix}}}
+
+\begin{tikzpicture}[node distance=4cm]
+    \node (lhs) { \(
+        \begin{aligned}
+            R_{1,1} \bvec{u}_1 + R_{1,2} \bvec{u}_2 + R_{1,3} \bvec{u}_3 &= \bvec{u'}_1 \\
+            R_{1,1} \bvec{v}_1 + R_{1,2} \bvec{v}_2 + R_{1,3} \bvec{v}_3 &= \bvec{v'}_1 \\
+            R_{1,1} \bvec{w}_1 + R_{1,2} \bvec{w}_2 + R_{1,3} \bvec{w}_3 &= \bvec{w'}_1
+        \end{aligned}
+    \) };
+    \node[right=of lhs] (rhs) { \(
+        \begin{aligned}
+            \A \pointsub{R}{1} = \point{\bvec{u'}}
+        \end{aligned}
+    \) };
+    \draw[->, semithick] (lhs.east) -- (rhs.west);
+\end{tikzpicture}
+
+\begin{tikzpicture}[node distance=4cm]
+    \node (lhs) { \(
+        \begin{aligned}
+            R_{2,1} \bvec{u}_1 + R_{2,2} \bvec{u}_2 + R_{2,3} \bvec{u}_3 &= \bvec{u'}_2 \\
+            R_{2,1} \bvec{v}_1 + R_{2,2} \bvec{v}_2 + R_{2,3} \bvec{v}_3 &= \bvec{v'}_2 \\
+            R_{2,1} \bvec{w}_1 + R_{2,2} \bvec{w}_2 + R_{2,3} \bvec{w}_3 &= \bvec{w'}_2
+        \end{aligned}
+    \) };
+    \node[right=of lhs] (rhs) { \(
+        \begin{aligned}
+            \A \pointsub{R}{2} = \point{\bvec{u'}}
+        \end{aligned}
+    \) };
+    \draw[->, semithick] (lhs.east) -- (rhs.west);
+\end{tikzpicture}
+
+\begin{tikzpicture}[node distance=4cm]
+    \node (lhs) { \(
+        \begin{aligned}
+            R_{3,1} \bvec{u}_1 + R_{3,2} \bvec{u}_2 + R_{3,3} \bvec{u}_3 &= \bvec{u'}_3 \\
+            R_{3,1} \bvec{v}_1 + R_{3,2} \bvec{v}_2 + R_{3,3} \bvec{v}_3 &= \bvec{v'}_3 \\
+            R_{3,1} \bvec{w}_1 + R_{3,2} \bvec{w}_2 + R_{3,3} \bvec{w}_3 &= \bvec{w'}_3
+        \end{aligned}
+    \) };
+    \node[right=of lhs] (rhs) { \(
+        \begin{aligned}
+            \A \pointsub{R}{3} = \point{\bvec{u'}}
+        \end{aligned}
+    \) };
+    \draw[->, semithick] (lhs.east) -- (rhs.west);
+\end{tikzpicture}
+
+Notice now that we have the same matrix on the right side. We'll call this
+matrix \( A \). The great thing about this operation is that we only really
+need to find the inverse of one matrix, namely \( A^{-1} \). Doing so, we
+finally get a way to calculate the coefficients in \( R \) in terms of our vectors \( \bvec{u} \), \( \bvec{v} \), and \( \bvec{w} \) as such:
+\[
+    \pointsub{R}{1} = A^{-1} \point{\bvec{u'}}, \qquad \pointsub{R}{2} = A^{-1} \point{\bvec{v'}}, \qquad \pointsub{R}{3} = A^{-1} \point{\bvec{w'}} 
+\]
+\endgroup
+
+With this, our Rubik's cube rotations now work properly \MarginComment{Okay for
+the project it also actually took me a while to realize that I defined matrix
+multiplication incorrectly, but we won't go into that.} and the world is saved,
+with cubers and non-cubers alike able to enjoy the wonders that are rotations.

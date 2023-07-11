@@ -1,0 +1,102 @@
+\documentclass[10pt, twoside]{article}
+
+\RequirePackage{amsmath}
+\RequirePackage{amsthm}
+\RequirePackage{amssymb}
+% \RequirePackage[top=2cm, asymmetric, left=2.5cm, right=6cm]{geometry}
+\RequirePackage[top=2cm, inner=2.5cm, outer=6cm]{geometry}
+
+\RequirePackage{titlesec}
+\RequirePackage[hidelinks]{hyperref}
+\RequirePackage[english]{babel}
+\RequirePackage[autostyle, english=american]{csquotes}
+\RequirePackage[skip=8pt]{parskip}
+\RequirePackage{caption}
+\RequirePackage[nodisplayskipstretch]{setspace}
+\RequirePackage{mathtools}
+\RequirePackage{xcolor}
+\RequirePackage{tcolorbox}
+\RequirePackage{enumitem}
+\RequirePackage{multicol}
+\RequirePackage{subcaption}
+% \RequirePackage{mleftright}
+% \mleftright
+\RequirePackage{tikz}
+\RequirePackage{tikzscale}
+
+\usetikzlibrary{tikzmark}
+
+\RequirePackage{ifthen}
+
+% \RequirePackage{cmbright}
+% \usepackage[t,lf]{spectral}
+\RequirePackage{libertine}
+\RequirePackage{libertinust1math}
+% \RequirePackage[default,regular,semibold,scale=0.9]{sourceserifpro}
+
+\input{style.tex}
+\input{util.tex}
+
+\title{The Math Journal}
+\author{Rushil Surti}
+
+\begin{document}
+
+% Title Page
+\begin{titlepage}
+\newgeometry{}
+
+\maketitle
+
+\restoregeometry
+\end{titlepage}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+% We will organize the entries in the filesystem as such
+% - main.tex
+% - entries
+%   - entry000
+%     - index.tex
+%     - body.tex
+%   - entry001
+%     - index.tex
+%     - body.tex
+%   - ...
+
+% index.tex will contain some of the parts that should be
+% separated from the writing view, such as the section
+% header and potentially small section table of contents.
+% The actual writing will be placed in body.tex, which is
+% included by index.tex for convenience.
+
+% Aside: Why use numbers to identify the entry instead of a short
+% description of what it's about?
+% While it might help when searching in files to have a short title
+% as the filename instead of some arbitrary number, there are a few
+% complications:
+% 1. (Good) names are hard to come up with.
+% 2. Detailed title names lose any sort of uniformity in filenames.
+%    What if I want to (for example) create a program that fills in
+%    the boilerplate necessary to create a new directory (allowing me
+%    to just get straight into writing)? With named titles this is hard
+% As a compromise, it is trivial to simply use grep and search through
+% all files to find what exactly I'm looking for. I can even put in keywords
+% in the index.tex or body.tex file if needed.
+\input{entries/entry000/index.tex}
+\input{entries/entry001/index.tex}
+\input{entries/entry002/index.tex}
+\input{entries/entry003/index.tex}
+\input{entries/entry004/index.tex}
+\input{entries/entry005/index.tex}
+\input{entries/entry006/index.tex}
+\input{entries/entry007/index.tex}
+\input{entries/entry008/index.tex}
+\input{entries/entry009/index.tex}
+\input{entries/entry010/index.tex}
+\input{entries/entry011/index.tex}
+
+\end{document}

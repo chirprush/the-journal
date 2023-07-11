@@ -1,0 +1,174 @@
+Every so often, I'm scrolling through YouTube, and I find a cool problem in the
+thumbnail that I just can't help but want to solve. Surprising as it is, some
+Putnam problems are actually not as difficult as you might think, and the
+calculus problems especially are always quite a bit of fun. Besides, it seems
+I'm on quite the roll for cool competition math problems, so I might as well
+continue on.
+
+The problem that caught my eye goes as follows:
+
+\begin{blackbox}
+    \begin{problem}[77th Putnam Problem A3]
+        Let \( f \colon \mathbb{R} \to \mathbb{R} \) be the solution to the functional equation
+        \[
+            f \left( x \right) + f \left( 1 - \frac{1}{x}  \right) = \arctan{x}
+        .\]
+        Find
+        \[
+            \int_{ 0 }^{ 1 } f \left( x \right) \, dx
+        .\]
+    \end{problem}
+\end{blackbox}
+
+\subsection{Solving the Functional Equation}
+
+While at first this does look a bit daunting, let's play around a bit with the
+expressions inside the functions, solving for some values. Let \( x = 2 \), giving us
+\[
+    f \left( 2 \right) + f \left( 1/2 \right) = \arctan{2}
+.\]
+Now we have two unknowns, so let's try and see if there's another relation involving \( f \left( 1/2 \right) \). Let's set \( x = 1/2 \), giving us:
+\[
+    f \left( 1/2 \right) + f \left( -1 \right) = \arctan{\left( 1/2 \right)}
+.\]
+Let's go one level deeper, setting \( x = -1 \).
+\[
+    f \left( -1 \right) + f \left( 2 \right) = \arctan{\left(-1 \right)}
+.\]
+Quite interestingly, we see that we have three relations for three different
+unknowns, which means that we can solve for each of them. What's more useful
+for us though, is that this choice of \( 2 \) was arbitrary, meaning that we
+can do this for any value of \( x \) (disregarding singularities).
+\MarginComment{For many functional equations, simply playing around with
+different substitutions or specific values often helps one gain a good insight
+as to what's going on.}
+
+This means that there is a quite simple way of solving for the function, and all we need to do is just take the approach from above but generalize it.
+
+In particular, define \( g \left( x \right) = 1 - 1 / x \). Notice the
+following very nice properties that emerge when we take iterated applications
+of \( g \left( x \right) \).
+\begin{align*}
+    g \left( x \right) &= 1 - 1/x \\
+    g \left( g \left( x \right) \right) &= 1 / \left( 1 - x \right) \\
+    g \left( g \left( g \left( x \right) \right) \right) &= x
+.\end{align*}
+Any subsequent applications will go back to one of these three functions due
+to, \( x \) being the identity function. Using this, we can now solve the
+functional equation. We shall use our given equation, writing it in terms of
+our new function \( g \left( x \right) \) and also the modified function
+equations with the substitutions \( x \mapsto g \left( x \right) \) and \( x
+\mapsto g \left( g \left( x \right) \right) \) to yield a system of three
+equations with three unknowns.
+\[
+\begin{array}{ccccccl}
+    f \left( x \right) & + & f \left( g \left( x \right) \right) & + & 0 & = & \arctan{x} \\
+    0 & + &  f \left( g \left( x \right) \right) & + & f \left( g \left( g \left( x \right) \right) \right) & = & \arctan{\left( g \left( x \right) \right)} \\
+    f \left( x \right) & + & 0 & + & f \left( g \left( g \left( x \right) \right) \right) & = & \arctan{\left( g \left( g \left( x \right) \right) \right)}
+\end{array}
+\]
+Through some rather simple algebra, we can solve the system to see that
+\[
+    2 f \left( x \right) = \arctan{x} - \arctan{\left( g \left( x \right) \right)} + \arctan{\left( g \left( g \left( x \right) \right) \right)}
+.\]
+With this, we're a whole lot closer to getting our answer. Now all that's left is to integrate!
+
+\subsection{Integrating Some Arctangents}
+
+If we integrate on both sides of our solved functional equation, we can split
+up each term into separate integrals and tackle each of them one-by-one.
+\[
+    2 \int_0^1 f \left( x \right) \, dx = \overset{\textbf{1.}}{\boxed{\int_{ 0 }^{ 1 } \arctan{x} \, dx}} - \overset{\textbf{2.}}{\boxed{\int_{ 0 }^{ 1 } \arctan{\left( 1 - \frac{1}{x} \right)} \, dx}} + \overset{\textbf{3.}}{\boxed{\int_{ 0 }^{ 1 } \arctan{\left( \frac{1}{1 - x} \right)} \, dx}}
+.\]
+We'll start off with the easiest one, which is just the integral of plain \( \arctan{x} \), which lends itself well to integration by parts:
+\begin{flalign*}
+    \textbf{1.} \int_{ 0 }^{ 1 } \arctan{x} \, dx &= \bounds{x \arctan{x}}{0}{1} - \int_{ 0 }^{ 1 } \frac{x}{x^2 + 1} \, \tikzmarknode{ibp1}{dx} & \\
+    &= \frac{\pi}{4} - \bounds{\frac{1}{2} \ln{\abs{x^2 + 1}}}{0}{1} \tikzmarknode{usub1}{} & \\
+    &= \boxed{\frac{\pi}{4} - \frac{1}{2} \ln{2}}. &
+\end{flalign*}
+Luckily, \( \arctan{x} \) is a simple inverse function, so there's not much
+difficulty in using integration by parts to find its integral. This next
+integral won't be the cleanest.
+\begin{tikzpicture}[overlay, remember picture]
+    \draw[<-, semithick] (ibp1) ++ (0.5, 0) -- ++ (2, 0) node[above left] {\footnotesize IBP} node[right, draw=black] {
+    \(
+    \footnotesize
+        \arraycolsep=1pt
+        \begin{array}{cclcccl}
+            u & = & \arctan{x} & \  & du & = & dx /( x^2 + 1 ) \\
+            dv & = & dx & \  & v & = & x \\
+        \end{array}
+    \)};
+
+    \draw[<-, semithick] (usub1) ++ (0.2, 0) -- ++ (3.5, 0) node[above left] {\footnotesize substitution} node[right, draw=black] {
+    \(
+    \footnotesize
+        \arraycolsep=1pt
+        \begin{array}{ccl}
+            w & = & x^2 + 1 \\
+            dw & = & 2x \, dx
+        \end{array}
+    \)};
+\end{tikzpicture}
+
+For this integral, \MarginComment{TODO: Add in the boxes showing substitutions
+and such. They take a bit of work to put in, but it makes stuff easier to
+follow.} we'll again start with integration by parts, but a little more work is
+required to get it into a nice form.
+\begin{align*}
+    \textbf{2.} \int_{ 0 }^{ 1 } \arctan{\left( 1 - \frac{1}{x} \right)} \, dx &= \bounds{x \arctan{\left( 1 - \frac{1}{x} \right)}}{0}{1} - \int_{ 0 }^{ 1 } \frac{1}{x + x\left( 1 - \frac{1}{x} \right)^2} \, dx
+\end{align*}
+For the left term, we can plug in \( x = 1 \) to get \( 0 \) for the top bound, but we must take the limit as \( x \to 0^+ \) for the second.
+\begin{align*}
+    \bounds{x \arctan{\left( 1 - \frac{1}{x} \right)}}{0}{1} &= - \lim_{x \to 0^+} x \arctan{\left( 1 - \frac{1}{x} \right)} \\
+    &= - \lim_{x \to 0^+} \frac{\arctan{\left( 1 - 1/x \right)}}{1 / x} \\
+    &= - \lim_{x \to 0^+} \frac{1}{1 + \left( 1 - \frac{1}{x} \right)^2} \\
+    &= - \lim_{u \to -\infty} \frac{1}{1 + u^2} \\
+    &= 0
+.\end{align*}
+We now return to our integral and work it into a nicer form:
+\begin{align*}
+    &- \int_{ 0 }^{ 1 } \frac{1}{x + x \left( 1 - \frac{1}{x} \right)^2} \, dx = - \int_{ 0 }^{ 1 } \frac{x}{x^2 + \left( x - 1 \right)^2} \, dx \\
+    &= - \int_{ 0 }^{ 1 } \frac{x}{2x^2 - 2x + 1} \, dx = - \int_{ 0 }^{ 1 } \frac{2x}{\left( 2x - 1 \right)^2 + 1} \, dx \\
+    &= - \int_{ 0 }^{ 1 } \frac{\left( 2x - 1 \right) + 1}{\left( 2x - 1 \right)^2 + 1} \, dx = -\frac{1}{2} \int_{ -\pi/4 }^{ \pi/4 } \left( \tan{\theta} + 1 \right) \, d\theta \\
+    &= \boxed{\frac{-\pi}{4}}
+\end{align*}
+On to the next integral!
+
+For this one, we'll first do a \( u \)-substitution of the entire integrand,
+getting us to something perhaps a little bit more familiar looking.
+\begin{align*}
+    \textbf{3.} &\int_{ 0 }^{ 1 } \arctan{\left( \frac{1}{1 - x} \right)} \, dx \\
+    &= \int_{\pi/4}^{\pi/2} u \csc^2{u} \, du
+.\end{align*}
+We'll now do just a little bit of tabular integration:
+\[
+\begin{array}{ccc}
+    & D & I \\
+    + & u & \csc^2{u} \\
+    - & 1 & -\cot{u} \\
+    + & 0 & -\ln{\abs{\sin{u}}}
+\end{array}
+\]
+This means that the integral becomes
+\begin{align*}
+    &\left[ -u\cot{u} + \ln{\abs{\sin{u}}} \rule{0pt}{10pt} \right]_{\pi/4}^{\pi/2} \\
+    &= \boxed{\frac{\pi}{4} + \frac{1}{2} \ln{2}}
+,\end{align*}
+which does indeed look suspiciously familiar to some of our other results.
+
+With this, we're pretty much complete with the problem, with all that's left to
+do being to substitute our values in. Taking great care to remember the \( 2 \)
+we placed in front of the integral way back last section, we see that the final
+answer to the problem is
+\[
+    \int_{0}^{1} f \left( x \right) \, dx = \frac{1}{2} \left( \frac{\pi}{4} - \frac{1}{2} \ln{2} + \frac{\pi}{4} + \frac{\pi}{4} + \frac{1}{2} \ln{2} \right) = \boxed{\frac{3 \pi}{8}}
+.\]
+
+Perhaps I'll do more Putnam problems in the future. They seem to be an
+interesting intersection of higher level mathematics (including stuff like
+calculus, abstract algebra, and combinatorics among others), but they
+definitely seem to have a different sort of "flavor" from the competition
+problems that I'm used to. Certainly, compared to the IMO and such, there are
+definitely some easier problems, but I'm sure not all of them are as easy.
+Perhaps I'll get to tackle the Putnam in person myself one day. Who knows?

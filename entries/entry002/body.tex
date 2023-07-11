@@ -1,0 +1,83 @@
+We all know and love (well hopefully) the famous product rule for derivatives, given as follows:
+\[
+    \frac{d}{dx} \Bigl( f \left( x \right) g \left( x \right) \Bigr) = f \left( x \right) g' \left( x \right) + f' \left( x \right) g \left( x \right)
+.\]
+But here's an interesting question. What happens when we have more than two
+\MarginComment{Finally! A problem that won't make me tear my hair out.}
+functions of \( x \) multiplied together? The result is what's called the
+Leibniz product rule. Let's derive it!
+
+\begin{blackbox}
+    \begin{problem}
+        What does the following evaluate to?
+        \[
+            \frac{d}{dx} \prod_{i = 1}^{n} f_i \left( x \right)
+        \]
+    \end{problem}
+\end{blackbox}
+
+\subsection{Solving}
+
+To be honest, there isn't much complicated machinery involved in this one. First, let's observe what happens we increase the number of functions.
+
+\textit{Case} \( n = 3 \):
+
+We want to take the derivative of the product \( f_1 \> f_2 \> f_3 \). \MarginComment{It's a bit noisy with all the \( x \) arguments, so while I'll omit them here, just know that these are all functions of \( x \).} Left with no other choice, we proceed by using our normal product rule, taking our left function to be \( f_1 \) and our right function to be the product \( f_2 \> f_3 \), resulting in the following:
+\begin{align*}
+    \frac{d}{dx} \Bigl( f_1 \cdot f_2 \> f_3 \Bigr) &= f_1' \> f_2 \> f_3 + f_1 \cdot \frac{d}{dx} \Bigl( f_2 \> f_3 \Bigr) \\
+    &= f_1' \> f_2 \> f_3 + f_1 \cdot \left( f_2' \> f_3 + f_2 \> f_3' \right) \\
+    &= f_1' \> f_2 \> f_3 + f_1 \> f_2' \> f_3 + f_1 \> f_2 \> f_3'
+.\end{align*}
+
+\textit{Case} \( n = 4 \):
+One may also verify the following, using the fact that we have already found the derivative for three functions.
+\[
+    \frac{d}{dx} \Bigl( f_1 \> f_2 \> f_3 \> f_4 \Bigr) = f_1' \> f_2 \> f_3 \> f_4 + f_1 \> f_2' \> f_3 \> f_4 + f_1 \> f_2 \> f_3' \> f_4 + f_1 \> f_2 \> f_3 \> f_4'
+.\]
+
+It may become clear now that we have a pattern forming with a rather beautiful symmetry. It seems that when we take the derivative of the product of these \( n \) functions, it splits into \( n \) terms each with the same product except for one function's derivative being taken. This recurrence forming in the pattern may also help motivate our method of proof of this a little bit later on.
+
+This can be expressed a little more compactedly (although perhaps less illuminatingly) as the following:
+\[
+    \frac{d}{dx} \prod_{i = 1}^{n} f_i \left( x \right) = \sum_{i = 1}^{n} f_i' \left( x \right) \prod_{\substack{j = 1 \\ j \ne i}}^{n} f_i \left( x \right)
+\]
+
+We shall now show this rigorously.
+
+\begin{proof}
+    We shall show this using proof by induction. For our base case, the case \( n = 1 \) or \( n = 2 \) are quite trivial.
+
+    Next, suppose that for some \( k \) we have that
+    \[
+        \frac{d}{dx} \prod_{i = 1}^{k} f_i \left( x \right) = \sum_{i = 1}^{k} f_i' \left( x \right) \prod_{\substack{j = 1 \\ j \ne i}}^{k} f_i \left( x \right)
+    \]
+    We now must show that the same holds when we increase \( k \mapsto k + 1 \), effectively multiplying inside the derivative by a new function \( f_{k+1} \). Taking one side to be \( f_{k+1} \) and the other to be our big product, we can continue with regular product rule.
+    \begin{align*}
+        \frac{d}{dx} \Bigl( f_{k+1} \cdot \prod_{i = 1}^{k} f_i \left( x \right) \Bigl) &= f_{k+1} \cdot \sum_{i = 1}^{k} f_i' \left( x \right) \prod_{\substack{j = 1 \\ j \ne i}}^{k} f_i \left( x \right) + f_{k+1}' \prod_{i = 1}^{k} f_i \left( x \right) \\
+        &= \sum_{i = 1}^{k} f_i' \left( x \right) \prod_{\substack{j = 1 \\ j \ne i}}^{k + 1} f_i \left( x \right) + f_{k+1}' \prod_{i = 1}^{k} f_i \left( x \right)
+    \end{align*}
+    With this, \MarginComment{You know, there's actually quite the bit of "symbol soup" going on here. Perhaps expanding this would make it look more reasonable? I'll have to revisit this sometime because I don't think the math nor the explanation are very helpful if you don't have the idea in mind.} we're almost where we want to be at. After bringing the \( f_{k+1} \) term inside the product on the right side, notice that we have in our left term all "groups of terms" where there is one derivative \textit{except} for \( f_{k+1} \), and on the right side, we have our \textit{only} derivative being \( f_{k+1} \). We can bring this right term inside, now giving us our desired form.
+    \[
+        \frac{d}{dx} \prod_{i = 1}^{k + 1} f_i \left( x \right) = \sum_{i = 1}^{k + 1} f_i' \left( x \right) \prod_{\substack{j = 1 \\ j \ne i}}^{k + 1} f_i \left( x \right)
+    \]
+    This concludes the proof.
+\end{proof}
+
+\subsection{Uses}
+The reader may now be wondering, what could possibly be the use of such a formula? Indeed, it's not \textit{too} often that one needs to take the derivative of a large product (for a Taylor series, you'd need to be able to take \( n \) derivatives, and that gets quite hairy in of itself); however, allow me to offer at least one "cool" \MarginComment{Well at the very least, I think it's cool!} example. One of the times you may see a product that works very well for these cases is a factored polynomial.
+
+Consider a polynomial \( P \left( x \right) \) that has \( n \) distinct \MarginComment{These roots necessarily have to be distinct, as we'll see later ;)} roots \( r_1,r_2,\ldots,r_n \). We can write the polynomial as the following:
+\[
+    P \left( x \right) = \prod_{i=1}^{n} \left( x - r_i \right)
+.\]
+Perhaps you can see where I'm going with this. Using our generalized product rule, we can take the derivative of \( P \left( x \right) \), noting that each individual term has a derivative of simply \( 1 \) due to it being a linear term.
+\[
+    P' \left( x \right) = \sum_{i = 1}^{n} \prod_{\substack{j = 1 \\ j \ne i}}^{n} \left( x - r_j \right)
+\]
+This in of itself isn't all too interesting, following directly from our generalized product rule. If we plug in \textit{the roots} into the derivative, however fun things happen with canceling. Taking \( x \) to be some arbitrary root \( r_j \), we have that
+\[
+    P' \left( r_j \right) = \prod_{\substack{i = 1 \\ i \ne j}}^{n} \left( r_j - r_i \right)
+\]
+For \textit{any polynomial}, the derivative of it at some root is the product of the differences of that root with all the others. That's pretty cool.
+
+Remember, back to when we said that these roots have to be \textit{distinct}? If we now relax that and instead say that some root \( r_j \) has a multiplicity greater than one, something else happens instead. Because we only take the derivative of one of the terms containing \( x - r_j \), there are still other terms with this, making the derivative \( 0 \) altogether. This tells us that for any polynomial, there is going to be a horizontal tangent at any root whose multiplicity is greater than one. That's also pretty \textit{smooth} if I do say so myself.

@@ -1,0 +1,127 @@
+\newcommand{\boxdiagram}[7][]{
+    \begin{center}
+    \begin{tikzpicture}
+        \draw[thick] (0, 0) rectangle (1, 1);
+        \draw[thick] (2, 0) rectangle (3, 1);
+        \draw[thick] (4, 0) rectangle (5, 1);
+        \draw[thick] (6, 0) rectangle (7, 1);
+        \draw[thick] (8, 0) rectangle (9, 1);
+        \draw[thick] (10, 0) rectangle (11, 1);
+
+        \node at (0.5, 0.5) {#2};
+        \node at (2.5, 0.5) {#3};
+        \node at (4.5, 0.5) {#4};
+        \node at (6.5, 0.5) {#5};
+        \node at (8.5, 0.5) {#6};
+        \node at (10.5, 0.5) {#7};
+
+        \ifthenelse{\equal{#1}{}}{}{
+            \draw[thick, ->] (5.5, -0.25) -- (5.5, -1.25);
+            \node at (6, -0.75) {\ensuremath{#1}};
+        }
+    \end{tikzpicture}
+    \end{center}
+}
+
+Hay hay! It's the summer, so I actually have quite a bit more time now to spend
+on problems and such. \MarginComment{I'm actually really excited! I've vowed to
+be more productive over the summer so this seems like the perfect opportunity,
+although I do have to self-study some stuff.} With this extra time, I thought
+it would be really cool to try and tackle a far harder competition math problem
+than usual. After looking through a couple problems, I chanced upon a very cool
+looking IMO problem, so I thought it would be perfect for the occasion. Here's
+how it goes:
+
+\begin{blackbox}
+    \begin{problem}[2010 IMO Problem \#5]
+        Each of the six boxes \( B_1, B_2, B_3, B_4, B_5, B_6 \) initially
+        contains one coin. The following operations are allowed:
+
+        \begin{enumerate}[topsep=10pt, itemsep=5pt]
+            \item Choose a non-empty box \( B_j \), \( 1 \le j \le 5 \), remove
+                one coin from \( B_j \) and add two coins to \( B_{j + 1} \).
+            \item Choose a non-empty box \( B_k \), \( 1 \le k \le 4 \), remove
+                one coin from \( B_k \) and swap the contents (maybe empty) of
+                the boxes \( B_{K+1} \) and \( B_{k+2} \).
+        \end{enumerate}
+
+        Determine if there exists a finite sequence of operations of the
+        allowed types, such that the five boxes \( B_1, B_2, B_3, B_4, B_5 \)
+        become empty, while box \( B_6 \) contains exactly \(
+        2010^{2010^{2010}} \) coins.
+    \end{problem}
+\end{blackbox}
+
+As a brief remark on notation, I'll represent first move type by \( D_k \) and the second by \( S_k \), representing "double" and "swap" respectively, with \( k \) denoting the chosen box that the move acts upon.
+
+I chose this problem in particular because, as you might see, there isn't any
+crazy algebra or geometry or number theory going on where I would have to
+recall some very specific theorem and have a great deal of intuition for the
+subject (not to harp on those problems \textit{too much}; I just wouldn't be
+able to solve them very well haha). This problem is quite nice in that it
+requires, at least on its face, no mathematical background or knowledge but
+rather a determined enough problem solver. It's a fun puzzle, and I really would
+like to tackle it. So, let's get started!
+
+\subsection{Observations}
+
+It's time to brainstorm how to actually start the problem and sort of what I
+think we're really aiming for. \MarginComment{To be honest, starting the problem
+is probably one of my weak spots, although that may be the case somewhat for
+everyone.} This problem is really a game with a set of rather simple moves, and
+I get the feeling that this is going to be solved through pure logic rather
+than any fancy or flashy math theorem. 
+
+Because this is an IMO problem, I'm of the opinion that the answer is one of
+two things:
+\begin{enumerate}
+    \item There \textit{does} exist such a sequence and it's rather hard to
+        find.
+    \item There \textit{doesn't} exist such a sequence, and the proof for such
+        is rather hard.
+\end{enumerate}
+So, in summary, the problem is hard, but I mean that's why I picked it. I'm
+leaning towards there being such a sequence because that seems a lot more fun,
+but we probably wouldn't have to construct such a sequence anyways.
+
+The proof may also revolve around some very light number theory in terms of
+parity. We might also have to take into consideration ideas such as the maximum
+possible number of coins to exist in the system and comparing that to our big
+constant.
+
+In fact, on the topic of The Big Constant\texttrademark, I find it somewhat
+hard to imagine it being special or completely unique in some way that allows
+this problem to work. \MarginComment{I mean if it is though that's pretty
+amazing.} It's likely that, if the sequence does indeed exist, we're looking
+for a more general way to reach a state of say \( 1, 1, 1, 1, 1, n \) or
+something similar rather than the exact number.
+
+Another thing to consider is that the first box may be some place to start as
+there is only one possible move you can ever do on in throughout the course of
+the game. When we do this move, the box ends up with \( 0 \) coins, and there
+is no way to add back to that (and obviously we have to do a move on this box
+because it has to become empty at some point.).
+
+Another thing to consider is the associativity and the commutativity of the
+moves. While I'm sure this problem could be framed entirely in a group theory or
+abstract algebra setting, there isn't all too much to gain from doing so, but
+taking some ideas over certainly can't hurt.
+
+\subsection{Odds and Ends}
+
+Let's start with the following observation: \( 2010^{2010^{2010}} \) is even,
+and \( 1 \) is not. It sounds quite obvious, but notice that the only way we
+can add pieces is with the doubling move, which adds \( 2 \) coins to the next
+box. This means that the parity of the boxes stays the same in this case, which
+we certainly don't want. We can address this then \MarginComment{The good 'ol
+Canadian shuffle, as they call it.} by subtracting one, which does change the
+parity, and then swapping the boxes around to get it into the desired position
+as such:
+
+\vspace{0.3cm}
+
+\boxdiagram[D_5]{1}{1}{1}{1}{1}{1}
+\boxdiagram[S_4]{1}{1}{1}{1}{0}{3}
+\boxdiagram     {1}{1}{1}{0}{3}{0}
+
+\let\boxdiagram\undefined

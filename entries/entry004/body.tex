@@ -1,0 +1,204 @@
+When you hear the term "partial fractions" perhaps your face lights up in
+delight, or perhaps your soul fills with dread in anticipation of the drudging
+through factoring and solving some linear equations for coefficients. \MarginComment{Personally, I quite enjoy doing partial fractions by hand, but to each their own I guess.} Whatever the case, partial fractions are quite the useful tool, especially so for integration and generating functions among others. However, it isn't all the time that we are working with some explicit values for our rational functions. This leads us mathematicians to a natural question, is there a way to generalize the solving of such partial fractions?
+
+\subsection{Finding a Beautiful Result}
+
+Let's start with the following: suppose that our rational function that we want
+to decompose is of the form \( P \left( z \right) / Q \left( z \right) \),
+where \( P \left( z \right) \) and \( Q \left( z \right) \) are polynomials.
+Because we want to be able to factor the denominator, let us also suppose that \( Q \left( z \right) \) is a degree \( n \) polynomial with distinct, complex roots \( z_1, z_2, \ldots, z_n \). \MarginComment{Notice that I said distinct roots. While what we're doing could probably be extended, this method as of right now probably does not work for roots of greater multiplicity than one. Perhaps a problem for future me.} In short, \( Q \left( z \right) = \left( z - z_1 \right) \left( z - z_2 \right) \cdots \left( z - z_n \right) \). Then by our usual partial fractions setup, we must have that
+\[
+    \frac{P \left( z \right)}{Q \left( z \right)} = \sum_{i = 1}^{n} \frac{a_i}{z - z_i}
+,\]
+where each \( a_i \) is really just some coefficient that we don't know yet.
+Most of our work will be to use some method to find these coefficients. If we
+remember back to regular partial fractions, one of the first things we do after
+setting it up is multiplying across by the denominator. This then later on
+allows us to plug in values for \( z \) without getting \( 0 \) in the
+denominator. Doing so, we get the following:
+\[
+    P \left( z \right) = \sum_{i = 1}^{n} a_i \cdot \frac{Q \left( z \right)}{z -  z_i}
+.\]
+Now we can "plug in" our \( z \) values to help us find the value for each \( a_i \). Notice the quotes around "plug in." Given that we're plugging in roots for \( z \), we really have to be careful about simply just letting \( z \) equal some value with the roots in the denominator. Instead, for each \( a_i, i \in \{ 1, 2, \ldots, n \} \), we \textit{take the limit} as \( z \) approaches the \( i \)th root \( z_i \).
+\[
+    \lim_{z \to z_i} P \left( z \right) = \lim_{z \to z_i} \sum_{j = 1}^{n} a_j \cdot \frac{Q \left( z \right)}{z - z_j}
+.\]
+Now we have something quite interesting in particular. Notice that, because \( z_i \) is a root of \( Q \left( z \right) \), each numerator goes to \( 0 \), but before we get too ahead of ourselves, we must also consider the denominator. Only when \( j = i \) does \( z_j = z_i \) and make the denominator \( 0 \). This gives us the opportunity to cancel out all but the \( j = i \) case and then consider the limit from there.
+\[
+    P \left( z_i \right) = a_i \cdot \lim_{z \to z_i} \frac{Q \left( z \right)}{z - z_i}
+\]
+This is a classic \( 0 / 0 \) indeterminate form, so we can perhaps cheekily
+apply L'Hôpital's rule, which doesn't require much work at all. Solving for
+each \( a_i \) then yields
+\[
+    a_i = \frac{P \left( z_i \right)}{Q' \left( z_i \right)}
+.\]
+As such, we've delivered on the goal we set out to fulfill; that is, we have found our closed form for the coefficients, which is really all we needed for partial fractions. Thus we have this general formula for partial fractions:
+\[
+    \frac{P \left( z \right)}{Q \left( z \right)} = \sum_{i = 1}^{n} \frac{P \left( z_i \right)}{Q' \left( z_i \right) \left( z - z_i \right)}
+.\]
+At least for me, the first time I saw this and figured it out on paper was
+quite exciting but also I felt this was rather beautiful. The simple decomposition of a rational function somehow involves a derivative showing up in the denominator was extremely surprising to me at the time, and I've ended up using this in quite a few places.
+
+If you know some complex analysis, you'll probably be able to see that this is related to the residues of the function. That's why this method of partial fraction decomposition is called the \textit{residue method}.
+
+\subsection{Applications}
+
+Now it very well wouldn't be fair to the reader, myself, or even the math
+itself to show this result and not do anything with it, given how useful it
+certainly can be. In the introduction I mentioned that these are particularly
+useful for integration among others, so we'll go with that here. Now, if we're
+talking about integration over rational functions, then there's a
+\textit{really} good example of where this has benefits over your usual partial
+fraction methods.
+\begin{blackbox}
+\begin{problem}
+    Let's evaluate the infamous bump function integral using our new partial fraction method!
+    \[
+        \int \frac{1}{x^4 + 1} \, dx
+    \]
+\end{problem}
+\end{blackbox}
+It should be clear that we have \( P \left( x \right) = 1 \), \( Q \left( x
+\right) = x^4 + 1 \), and \( Q' \left( x \right) = 4x^3 \). The first thing we'll want to do is factor our
+denominator, which isn't too much different from the roots of unity.
+\begin{align*}
+    x^4 &= -1 =  \exp{\bigl( i \left( \pi + 2 \pi k \right) \bigr)} \\
+    x  &= \exp{\bigl( i \left( \pi / 4 + k \pi / 2  \right) \bigr)}
+\end{align*}
+Choosing different \( k \) values from \( 0 \) to \( 3 \) gives us the \( 4 \)
+distinct roots of \( Q \left( x \right) \). We will denote these roots by \(
+x_0, x_1, x_2, \) and \( x_3 \), with the subscript corresponding to the value
+of \( k \). Just like the roots of unity, these roots have some nice properties that interplay with each other. In particular, we have:
+\begin{multicols}{2}
+    \textit{Conjugates:}
+    \begin{align*}
+        x_0 &= \conj{x_3} \\
+        x_1 &= \conj{x_2}
+    \end{align*}
+
+    \textit{Opposites:}
+    \begin{align*}
+        x_0 &= -x_2 \\
+        x_1 &= -x_3
+    \end{align*}
+
+    \textit{Inverses:}
+    \begin{align*}
+        x_0 &= 1 / x_3 \\
+        x_1 &= 1 / x_2
+    \end{align*}
+
+    \textit{Rotations:}
+    \begin{alignat*}{2}
+        x_0^3 &= x_1 &&\quad x_2^3 = x_3 \\
+        x_1^3 &= x_0 &&\quad x_3^3 = x_2
+    \end{alignat*}
+\end{multicols}
+With this in mind, we can proceed with the integral, using our residue method for partial fractions.
+\begin{align*}
+    \int \frac{1}{x^4 + 1} \, dx &= \int \left( \frac{1}{4x_0^3 \left( x - x_0 \right)} + \frac{1}{4x_1^3 \left( x - x_1 \right)} + \frac{1}{4x_2^3 \left( x - x_2 \right)} + \frac{1}{4x_3^3 \left( x - x_3 \right)} \right) \, dx \\
+    &= \frac{1}{4} \int \left( \frac{x_3^3}{x - x_0} + \frac{x_2^3}{x - x_1} + \frac{x_1^3}{x - x_2} + \frac{x_0^3}{x - x_3} \right) \, dx \\
+    &= \frac{1}{4} \int \left( \frac{x_2}{x - x_0} + \frac{x_3}{x - x_1} + \frac{x_0}{x - x_2} + \frac{x_1}{x - x_3} \right) \, dx \\
+    &= \frac{1}{4} \int \left( \frac{-x_0}{x - x_0} + \frac{-x_1}{x - x_1} + \frac{x_0}{x - x_2} + \frac{x_1}{x - x_3} \right) \, dx \\
+    &= \frac{x_0}{4} \Bigl( \Log{\left( x - x_2 \right)} - \Log{\left( x - x_0 \right)} \Bigr) + \frac{x_1}{4} \Bigl( \Log{\left( x - x_3 \right)} - \Log{\left( x - x_1 \right)} \Bigr) + C
+\end{align*}
+Now, there's a few things to pay attention to here, especially if you've seen
+the antiderivative of this bump function in a different form.
+\MarginComment{The "real" form that you may familiar with that includes the \(
+    \ln \) and \( \arctan \) terms can be obtained by combining some of the
+rational functions in the third line, but we want to avoid doing that because
+it takes a whole lot more work. Besides, both of these terms are really
+encompassed in the complex log anyways.} Because we've chosen to split the
+function into rational functions with complex coefficients as opposed to
+rational quadratics with real coefficients, we have to deal with some of the
+complications of working in the complex world. Notice how our logarithm is
+capitalized and doesn't have the absolute value sign. Yes, that's right, this
+is not your household "real" natural logarithm but rather the complex
+logarithm, defined as follows.
+\[ \Log{\left( z \right)} \coloneqq \ln{\abs{z}} + i\Arg{z} .\]
+More specifically, this is the principal branch where choose \( \Arg{z} \in
+\left( - \pi, \pi \right] \). We're still integrating along the real line and
+there isn't any contour action going on, but when dealing with the complex
+logarithm and complex numbers in real integrals, we do sometimes have to be
+careful about how we handle things. \MarginComment{Make sure to NINT before
+doing anything major. It saves lives, folks.} Indeed, a good indicator that
+something has terribly wrong and blown up is if we get a non-real value for a
+real definite integral.
+
+While we could just as easily stop here (in fact this would be great for a
+computer to use), many might---rightfully so in my opinion---complain that this
+is simply an unsatisfactory form that hides away what's really going on in a
+more complex (heh) way. After all, if we started with a completely real
+integrand, why should it be that we have an antiderivative that has complex
+numbers and multi-valued functions interspersed around in it? So, with this, we shall use the power of algebra to work this into a more real-looking form.
+
+If we are to clear this up without going through pages of algebra, it is best
+that we work at the more general level and then going through specific
+simplifications. Because of this, let us consider one of the general \(
+\Log{\left( x - x_k \right)} \) terms. In order to not confuse what is really
+going on, we shall also decompose the complex number \( x_k \) into its real and imaginary parts \( c_k + i s_k \).
+\begin{align*}
+    \Log{\left( x - x_k \right)} &= \ln{\abs{x - x_k}} + i \Arg{\left( x - x_k \right)} \\
+    &= \ln{\abs{x - c_k + i s_k}} + i \Arg{\left( x - c_k + i s_k \right)} \\
+    &= \ln{\abs{\sqrt{\left( x - c_k \right)^2 + s_k^2}}} + i \Arg{\left( x - c_k - i s_k \right)}
+.\end{align*}
+Inside the natural logarithm a bit of simplifying then happens, expanding the
+square inside and using the fact that \( c_k^2 + s_k^2 = 1 \). Note that we
+must also keep the absolute value sign when we pull out the square root and
+make it a \( 1/2 \).
+\begin{align*}
+    \Log{\left( x - x_k \right)} &= \frac{1}{2} \ln{\abs{x^2 - 2 c_k x + 1}} + i \Arg{\left( x - c_k - i s_k \right)}
+.\end{align*}
+Here's where we run into just a little bit of trouble. Ordinarily, we could
+turn this \( \Arg z \) term into a more comfortable single-valued real
+"feeling" function like \( \arctan{\bigl( \Im \left( z \right) / \Re \left( z
+\right) \bigr)} \), but we run into trouble when for example \( \Re \left( z
+\right) < 0 \) and \( \Im \left( z \right) < 0 \), mapping to a positive
+argument despite having a negative angle. After all, the range of \( \Arg z \)
+is larger than regular old \( \arctan \). Not to mention that there is a
+discontinuity if we try to do this, having a \( x - c_k \) term in the
+denominator.
+
+We can somewhat address this by using a certain \( \arctan \) identity,
+\MarginComment{I'm not too sure on the rigour of this also considering that
+this doesn't really solve the range problem, but the real antiderivative
+matches so perhaps it's just me being confused somewhere. Perhaps something to
+look at later.} which allows us to flip around its argument. Recall that
+\[
+    \arctan{x} = -\bigl( \pi/2 + \arctan{\left( 1/x \right)} \bigr)
+\]
+Using this we can now simplify the right term, giving us something that does
+look suspiciously familiar to the "real" antiderivative.
+\begin{align*}
+    \Log{\left( x - x_k \right)} &= \frac{1}{2} \ln{\abs{x^2 - 2c_k x + 1}} - i \pi / 2 - i\arctan{\left( \frac{x - c_k}{-s_k} \right)} \\
+    &= \frac{1}{2} \ln{\abs{x^2 - 2c_k x + 1}} - i \pi / 2 + i \arctan{\left( \frac{x - c_k}{s_k} \right)}
+.\end{align*}
+Since we have worked quite generally now, all that is left is to expand
+everything out and simplify, which is a matter of just a bit of algebra. In the
+end, the cancelling and the simplifying does work out to be quite satisfying,
+and I won't omit it just in case the reader wants to follow along. Perhaps this
+will just turn into a page of just equations, though. Who knows!
+\MarginComment{Both me after writing this and the reader know.}
+\begin{align*}
+    &= \frac{x_0}{4} \Bigl( \Log{\left( x - x_2 \right)} - \Log{\left( x - x_0 \right)} \Bigr) + \frac{x_1}{4} \Bigl( \Log{\left( x - x_3 \right)} - \Log{\left( x - x_1 \right)} \Bigr) + C \\
+    &= \frac{x_0}{4} \left( \frac{1}{2} \ln{\abs{x^2 - 2c_2 x + 1}} - i \pi/2 + i\arctan{\left( \frac{x - c_2}{s_2} \right)} \right) \\
+    &- \frac{x_0}{4} \left( \frac{1}{2} \ln{\abs{x^2 - 2c_0 x + 1}} - i \pi/2 + i\arctan{\left( \frac{x - c_0}{s_0} \right)} \right) \\
+    &+ \frac{x_1}{4} \left( \frac{1}{2} \ln{\abs{x^2 - 2c_3 x + 1}} - i \pi/2 + i\arctan{\left( \frac{x - c_3}{s_3} \right)} \right) \\
+    &- \frac{x_1}{4} \left( \frac{1}{2} \ln{\abs{x^2 - 2c_1 x + 1}} - i \pi/2 + i\arctan{\left( \frac{x - c_1}{s_1} \right)} \right) + C \\
+    &= \frac{1}{4 \sqrt{2}} \left( \frac{1}{2} \ln{\abs{x^2 + \sqrt{2} x + 1}} - i\arctan{\left( \sqrt{2} x + 1 \right)} \right) + \frac{i}{4 \sqrt{2}} \left( \frac{1}{2} \ln{\abs{x^2 + \sqrt{2} x + 1}} - i\arctan{\left( \sqrt{2} x + 1 \right)} \right) \\
+    &- \frac{1}{4 \sqrt{2}} \left( \frac{1}{2} \ln{\abs{x^2 - \sqrt{2} x + 1}} + i\arctan{\left( \sqrt{2} x - 1 \right)} \right) - \frac{i}{4 \sqrt{2}} \left( \frac{1}{2} \ln{\abs{x^2 - \sqrt{2} x + 1}} + i\arctan{\left( \sqrt{2} x - 1 \right)} \right) \\
+    &- \frac{1}{4 \sqrt{2}} \left( \frac{1}{2} \ln{\abs{x^2 - \sqrt{2} x + 1}} - i\arctan{\left( \sqrt{2} x - 1 \right)} \right) + \frac{i}{4 \sqrt{2}} \left( \frac{1}{2} \ln{\abs{x^2 - \sqrt{2} x + 1}} - i\arctan{\left( \sqrt{2} x - 1 \right)} \right) \\
+    &+ \frac{1}{4 \sqrt{2}} \left( \frac{1}{2} \ln{\abs{x^2 + \sqrt{2} x + 1}} + i\arctan{\left( \sqrt{2} x + 1 \right)} \right) - \frac{i}{4 \sqrt{2}} \left( \frac{1}{2} \ln{\abs{x^2 + \sqrt{2} x + 1}} + i\arctan{\left( \sqrt{2} x + 1 \right)} \right) + C \\
+    &= \boxed{\frac{1}{4 \sqrt{2}} \ln{\abs{x^2 + \sqrt{2} x + 1}} - \frac{1}{4 \sqrt{2}} \ln{\abs{x^2 - \sqrt{2} x + 1}} + \frac{1}{2 \sqrt{2}} \arctan{\left( \sqrt{2} x + 1\right) } + \frac{1}{2 \sqrt{2}} \arctan{\left( \sqrt{2} x - 1 \right)} + C.}
+\end{align*}
+Thus, we finally have our desired simplified form. 
+
+Really this started out more as a showcase of the cool partial fractions
+generalization, but it seems that in the end it morphed into simplifying our
+antiderivative into its rather beautiful real result. In the end, though, I
+hope your main takeaway from is that the complex logarithm form is a
+beautifully compact and rather simple way of denoting this far more involved
+antiderivative, and it was all thanks to the beautiful result we developed in
+the first section.

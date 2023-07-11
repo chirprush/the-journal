@@ -1,0 +1,218 @@
+Whoo boy after some brief styling with the document, it's finally time to get
+to our very first entry! This problem really isn't anything amazingly special
+to commemorate the occasion or anything, though; it's just the first one I had
+on hand.
+
+After drudging through the \( n \)th tangent line problem for the AP review, I
+\MarginComment{Even I sometimes come up with some interesting stuff, right?
+\textit{Right}?} started to get bored and my mind drifted. This is when I
+thought of the following problem.
+
+\begin{blackbox}
+    \begin{problem}
+        Let \( T \) denote the set of all points contained within every line
+        tangent to some function \( f \left( x \right) \). Is there a function
+        \( f \left( x \right) \) such that \( T = \mathbb{R}^2 \)?
+    \end{problem}
+\end{blackbox}
+
+This problem evolved after thinking about it for a while and actually trying
+\MarginComment{And I also like doing this because it details my thinking
+process and also simply goes to show that no mathematician is truly
+perfect. Math is a journey and behind every proof or problem there's
+potentially a lot of trial and error that happens, so don't be discouraged!}
+things out, but I thought I would at least share the original problem and my
+thoughts on it.
+
+\subsection{Playing Around with the Idea}
+
+I'm sure there's a lot of ways to start to tackle a problem like this, and
+depending on your experience, you may or may not quickly find something to
+latch onto, but one of the tried and true things to do is just play around with
+the problem. What exactly are we asking for, and what sort of assumptions can
+we make to narrow down the scope of the problem?
+
+\begin{figure}[ht]
+    \centering
+    \input{entries/entry001/tangent_line}
+    \captionof{figure}{Imagine dragging a point with its tangent line along some function \( f \left( x \right) \).}
+\end{figure}
+
+First, let's get a visual intuition for what we're actually measuring. Imagine
+for some function \( f \left( x \right) \) dragging a point along the curve and
+looking at the tangent line at that curve. For some curves, this tangent line
+will stay relatively similar (especially for functions with a constant
+derivative, which should make sense); however, for other functions, this
+tangent line will "sweep" across the plane, which is the ideal behavior we're
+looking for.
+
+Now \MarginComment{Remember, even if these don't mean much, that's fine! All
+we're trying to do is empty our brains and think of something that will lead us
+to a potential solution.} the problem has reduced to finding a function that
+will sweep through the \textit{entire} Cartesian plane. This corresponds to a
+function whose derivative has the following properties:
+
+\begin{enumerate}
+    \item A change in sign. If the derivative is always positive or always
+    negative, there's going to be some part of the plane that the tangent
+    lines will never reach, so the sign must flip somewhere.
+    \item Some sort of periodicity. Coupled with a change in sign, if we can
+    have the derivative be periodic in some form, it may reduce down to
+    some repeatable pattern covering the plane.
+    \item Steep lines. Perhaps subjective and not necessarily a requirement,
+    but derivatives with high magnitude will likely reach more points.
+\end{enumerate}
+
+Keeping this in mind, let's explore and essentially just guess some possible
+solutions. If we think about it for a minute though, we can actually come up
+with quite a few solutions! Right off the bat, we can see \( f \left( x \right)
+= \sin{\left( x \right)} \) is a applicable solution. So long as we keep on
+moving to infinity, the tangent line will keep sweeping through the plane.
+
+One could try and make the argument for a function defined over a finite
+domain, but this is easily adjustable with a simple change of argument such as
+\( f \left( x \right) = \sin{\left( 1/x \right)} \) or \( f \left( x \right) =
+\sin{\left( \ln{\left( x \right)} - \ln{\left( 1 - x \right)} \right)} \), both
+of which compress the entire domain of our wave into a finite domain. In fact,
+a far more challenging (and interesting) problem to tackle would be finding a
+function such that \( T = \mathbb{R}^2 \setminus P \), with \( P \) being some point
+on the Cartesian plane. In order to do this, however, we must introduce some
+some of quantitative metric to find out whether a point truly is included in \( T \).
+
+\subsection{Doing the Math\texttrademark}
+
+Now that we've looked at some intuition for what's happening and realized that
+we would like to make some adjustments to the problem, it's time to actually
+get down to business and figure out how to determine whether a point is in our
+set \( T \).
+
+\begin{proof}
+Given \MarginComment{I'm no expert on proofs and rigour (but I'm trying my best to improve!) so some of my arguments may be lacking in areas throughout this entire journal. But you'll forgive me, right? :)} some point \( a \) on \( f \left( x \right) \), we have the following line tangent to the function:
+\[
+    L_a \left( x \right) = f' \left( a \right) \left( x - a \right) + f \left( a \right)
+.\]
+In order for some point \( P \) to be contained in this tangent line, we must
+set \( x \) to \( P_x \) \MarginComment{I'm using "vector" notation for the
+    components of these points because its far more convenient that way. For
+    anyone unfamiliar, we take \( P_x \) to denote the \( x \) part of the
+point \( P \) and similarly \( P_y \) represents the \( y \) part of \( P \)}
+and \( L_a \left( x \right) \) to \( P_y \). This will then give us some
+function in \( a \), which tells us something about whether \( P \) is in \( T
+\). If there exists an \( a \) which solves the equation, we know that the
+point must be included in the set of points that the tangent lines contain. If
+not, however, we can say for certain that this point is not in \( T \).
+
+We can use this strategy to now show that \( f \left( x \right) = \sin{\left( x
+\right)} \) covers the entire Cartesian plane. Let us test any point \( P \)
+using the previous equation.
+\[
+    P \in T \iff 0 = \cos{\left( a \right)} \left( P_x - a \right) + \sin{\left( a \right)} - P_y
+.\]
+In cases like this, it is far easier to tools from calculus to verify that a
+solution exists rather than solving for it explicitly. Let us call the right
+hand side of our modified linearization "discriminant" function \MarginComment{I wasn't really sure what to call it so I landed on discriminant function. A "discriminating" function doesn't sound very nice now does it? :)} \( \phi_P \left( a \right) \),
+where \( P \) represents the point we are testing. If we
+vary \( a \), we see the following holds true.
+\begin{align*}
+    & \lim_{a \to \infty} \phi_P \left( 2 \pi a \right) \to -\infty \\
+    & \lim_{a \to -\infty} \phi_P \left( 2 \pi a \right) \to \infty
+.\end{align*}
+It is trivial to see then by the Intermediate Value Theorem that there exists
+some value of \( a \) on the number line in which \( \phi_P \left( a \right) = 0 \), which means
+that there exists some solution to our discriminant equation. Due to this applying
+for any arbitrary point \( P \), we have just shown that the entire Cartesian plane is
+contained in \( T \) for \( f \left( x \right) = \sin{\left( x \right)} \).
+\end{proof}
+
+Now that we have verified and familiarized ourselves with some of the tools at
+use here, let's go back to our modified problem. Can we construct a function
+where all but \textit{one single point} in the Cartesian plane is included in \( T \)?
+
+\subsection{The Modified Problem}
+
+This problem is a bit harder to tackle, especially at first glance. In the end,
+this boils down to whether or not we can find a function with some specific
+characteristics.
+
+% Change all the points with (x1, y1) to Q_x and Q_y because idk it feels
+% better than just randomly having x and y values that have a subscript index
+% but not having the existence of any other points.
+\begin{enumerate}
+    \item For every point \( Q \) that is not \( P \),
+        there must exist an \( a \) value such that our condition
+        \( 0 = f' \left( a \right) \left( Q_x - a \right) + f \left( a \right) - Q_y \)
+        holds.
+    \item Specifically for the point \( P \), there must be no solution to the given the preceding condition.
+\end{enumerate}
+
+Just to simplify things a little bit, let's take \( P \) to be the point
+\( \left( 0, 0 \right) \) and see what happens. Concretely, let's take a look at
+the second condition, as it seems much stronger (and thus can narrow down our
+choice of \( f \), if any). The condition now becomes that there must be
+\textbf{no} value of \( a \) such that the following has as solution:
+\[
+    0 = -a f' \left( a \right) + f \left( a \right) = \phi_P \left( a \right)
+.\]
+Utilizing this and the fact that \( f \) is continuous, we can split this into two (likely symmetric) cases.
+\begin{multicols}{2}
+\begin{enumerate}
+    \item \( \phi_P \left( a \right) > 0 \) for all \( a \)
+    \item \( \phi_P \left( a \right) < 0 \) for all \( a \).
+\end{enumerate}
+\end{multicols}
+We see that this must be the case once again due to the Intermediate Value
+Theorem. This also shows that the condition that \( f \) must be continuous
+over all real numbers is quite limiting.
+
+Let us suppose we have some function \( f \) where the first case is true.
+Notice then that if we let \( Q \) be of the form \( \left( P_x, y \right) = \left( 0, y \right) \) for some arbitrary \( y \), something quite interesting happens. Let us examine our discriminant functions again.
+\begin{align*}
+    \phi_P \left( a \right) &= -a f' \left( a \right) + f \left( a \right) \\
+    \phi_Q \left( a \right) &= -a f' \left( a \right) + f \left( a \right) - y = \phi_P \left( a \right) - y
+\end{align*}
+Notice that when we pick a point directly above or below \( P \), it
+corresponds to simply vertically shifting \( \phi_Q \left( a \right) \).
+Keeping in mind that we want \( \phi_P \left( a \right) \) to \textit{never}
+have a solution and \( \phi_Q \left( a \right) \) to \textit{always} have a
+solution, this poses a complication.
+
+With this, supposing that \( \phi_P \left( a \right) \) is always greater than
+\( 0 \), there will always be a sufficiently large negative \( Q_y \) value
+such that \( \phi_Q \left( a \right) \) does not have a solution. Vice versa, a
+similar condition holds for when \( \phi_P \left( a \right) \) is always less
+than \( 0 \). Thus, there exists \textbf{no continuous function \( f \) of \( x
+\) such that all but one point is included in the set of points of its tangent
+lines.} Truly a shame, but its cool that we can prove this.
+
+To offer a visual intuition for why this is the case, consider the function \(
+f \left( x \right) = 1/x^2 \). \MarginComment{This choice isn't quite continuous
+over all reals, but we'll let it slide because it was chosen in order to
+illustrate a point more than anything} As we head to the infinities at either side of the graph, the line gets closer and closer to obtaining a slope of \( 0 \). However, as we approach the pole at \( x = 0 \), the function quickly picks up and the line will get ever close to being vertical. This colors all of the Cartesian plane, \textit{except} for one particular strip of values on the negative \( y \)-axis.
+
+\subsection{Remarks}
+
+While we have shown that there exists no function of \( x \) with the
+properties described in the modified problem. One should note that the solution
+is almost trivial if we turn to the world of parametric functions. Consider a function \( f \) defined as such:
+\begin{align*}
+    f_x \left( t \right) &= \varepsilon \cos{\left( t \right)} \\
+    f_y \left( t \right) &= \varepsilon \sin{\left( t \right)}
+\end{align*}
+If we take \( \varepsilon \to 0^+ \), we quickly see the desired behavior. The
+fucntion, infinitely close to being a point, hugs the boundary of \( \left( 0,
+0 \right) \), with the tangent line going through all points except \( \left(
+0, 0 \right) \). If we wanted to have this centered around some arbitrary
+point, all we would have to do is simply add or subtract from the respective
+function components.
+
+\subsection{Conclusion}
+
+All in all, this was a sort of interesting problem, and I'm at least proud of
+it! It wasn't all that difficult and didn't require any higher level tools
+besides some calculus, but that in of itself is quite nice. I hope to find some
+similarly interesting problems that apply what the classroom teaches and goes
+beyond that, requiring some problem solving skills. Who knows? Maybe there's
+already a competition problem or such revolving around the concept. I wouldn't
+be too surprised if there was.
+
+With that, this is the end of the first entry in this journal. Hopefully it isn't the last :)
