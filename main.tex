@@ -15,10 +15,14 @@
 \RequirePackage[nodisplayskipstretch]{setspace}
 \RequirePackage{mathtools}
 \RequirePackage{xcolor}
+\RequirePackage{colortbl}
 \RequirePackage{tcolorbox}
 \RequirePackage{enumitem}
 \RequirePackage{multicol}
 \RequirePackage{subcaption}
+\RequirePackage{ifthen}
+\RequirePackage{MnSymbol}
+\RequirePackage{algpseudocode}
 % \RequirePackage{mleftright}
 % \mleftright
 \RequirePackage{tikz}
@@ -26,13 +30,32 @@
 
 \usetikzlibrary{tikzmark}
 
-\RequirePackage{ifthen}
+% While I think Libertine looks the best out of the fonts I've tried, I still
+% feel like I can find a better combination of fonts, so I've been trying a few.
+% It turns out that dealing with fonts in latex (well pdflatex at least) can be
+% quite the headache sometimes. Inconsolata is pretty much set for the
+% monospace font though.
 
 % \RequirePackage{cmbright}
 % \usepackage[t,lf]{spectral}
+
 \RequirePackage{libertine}
 \RequirePackage{libertinust1math}
+
 % \RequirePackage[default,regular,semibold,scale=0.9]{sourceserifpro}
+
+% Garamond seems to be quite the quite the pain to get working (especially to
+% get a decent looking font weight). The medium weight font looks nice except
+% for some reason it only seems to appear in amsthm environments and not in the
+% global text, which is puzzling and slightly annoying. Also, ebgaramond-maths
+% overrides any options you send to ebgaramond. If one tries to send these
+% options to ebgaramond-maths, they don't work so uhhhhhh the package is kinda
+% useless in that regard. Oldstyle numbers look pretty bad, which is why it's a
+% dealbreaker.
+% \usepackage[T1]{fontenc}
+% \usepackage[m, sb, lf]{ebgaramond}
+
+\RequirePackage{inconsolata}
 
 \input{style.tex}
 \input{util.tex}
@@ -98,5 +121,6 @@
 \input{entries/entry009/index.tex}
 \input{entries/entry010/index.tex}
 \input{entries/entry011/index.tex}
+\input{entries/entry012/index.tex}
 
 \end{document}

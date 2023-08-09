@@ -68,9 +68,16 @@ get started!
     \item Big Boy Bill has a counter at value \( 0 \) and flips a fair, random
         coin \( 15 \) times. Every time he flips the coin, if it lands on
         heads, he adds \( 2 \) to the counter, and if it lands on tails, he
-        adds \( 3 \) from the counter. There are \( m \) different sequences of
+        adds \( 3 \) to the counter. There are \( m \) different sequences of
         coin flips in which at the end of the flipping, the resulting value is
         divisible by \( 5 \). Day \( 2m \bmod{23} \).
+
+    \item For a base \( b \ge 3 \), define the \textit{descending base number}
+        \( D \left( b \right) \) to be the \( \left( b - 1 \right) \) digit
+        number in base \( b \) where the \( i \)th digit is precisely \( i \).
+        For example, \( D \left( 4 \right) = 321_4 = 57 \). Let \( P \) be the
+        number of descending base numbers that are prime. Day \( P^2 - 6P + 16
+        \).
 \end{enumerate}
 
 \subsection{Solutions}
@@ -280,5 +287,32 @@ get started!
             \binom{15}{0} + \binom{15}{5} + \binom{15}{10} + \binom{15}{15} = 6008
         .\]
         Now all that's left is to see that \( 2 \cdot 6008 \bmod{23} = \boxed{10} \).
+
+    \item We write the summation representation of \( D \left( b \right) \)
+        first:
+        \[
+            D \left( b \right) = \sum_{i = 1}^{b - 1} i b^{i - 1}
+        .\]
+        Motivated by this representation, examine \( D \left( b \right) \)
+        modulo \( \left( b - 1 \right) \). Because we are working in base \( b
+        \), this is equivalent to finding the sum of the digits modulo \(
+        \left( b - 1 \right) \). In other words,
+        \[
+            D \left( b \right) \equiv b \left( b - 1 \right) / 2 \equiv 0 \pmod{\left( b - 1 \right)}
+        .\]
+        In the case that \( b \) is even, this is \( 0 \), meaning that \( D
+        \left( b \right) \) is not prime. We now must check the case that \( b
+        \) is odd. Let \( b = 2k + 1 \). Notice that \( D \left( b \right) = D
+        \left( 2k + 1 \right) \) is also the sum of its digits modulo \( k \).
+        Equivalently,
+        \[
+            D \left( 2k + 1 \right) \equiv k \left( k - 1 \right) \equiv 0 \pmod{k}
+        .\]
+        Thus for odd \( b \) too, \( D \left( b \right) \) is not prime. We do,
+        however, have one extraneous case for \( b = 3 = 2 \cdot 1 + 1 \).
+        Since all numbers are divisible \( 1 \), we cannot apply this
+        conclusion to it. Checking manually to see that \( D \left( 3 \right) =
+        7 \) is prime, we have that \( P = 1 \). Thus, our answer is \( P^2 -
+        6P + 16 = \boxed{11}. \)
 
 \end{enumerate}
