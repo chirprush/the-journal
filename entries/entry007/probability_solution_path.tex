@@ -1,0 +1,24 @@
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[
+        flowbox/.style={rectangle, text centered, minimum width=1cm, minimum height=0.5cm, draw=black, font={\tiny}},
+        flowarrow/.style={->}
+    ]
+        \node[flowbox] (start) {Start};
+        \node[flowbox, right of=start, xshift=1cm] (udists) {Uniform Distributions};
+        \node[flowbox, right of=udists, xshift=2cm] (tdist) {Total Distribution};
+        \node[flowbox, right of=tdist, xshift=1cm] (answer) {Answer};
+
+        \node (middle) at ($(udists.east)!0.5!(tdist.west)$) {};
+
+        \node[flowbox, below of=middle, yshift=-0.1cm] (lap) {Laplace World};
+
+        \draw[flowarrow] (start) -- (udists);
+        \draw[flowarrow, decorate, decoration={zigzag, segment length=0.19cm, amplitude=0.05cm}] (udists) -- node[anchor=south, scale=0.8] {\tiny Convolutions} (tdist);
+        \draw[flowarrow] (tdist) -- (answer);
+
+        \draw[flowarrow] (udists) -- node[anchor=east] {\tiny \( \LaplaceL \)} (lap.west);
+        \draw[flowarrow] (lap.east) -- node[anchor=west] {\tiny \( \InvLaplaceL \)} (tdist);
+    \end{tikzpicture}
+    \caption{The solution path for solving the problem using probabilistic methods. Convolutions are too hard to work with even for small \( n \), but we can sidestep them with Laplace transforms.}
+\end{figure}

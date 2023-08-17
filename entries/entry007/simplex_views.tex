@@ -1,0 +1,98 @@
+\begin{figure}
+    \begin{minipage}{0.24\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \node[label={[anchor=west]:\tiny \( \left( 1, 0, 0 \right) \)}] (xbasis) at (1, 0, 0) {};
+        \node[label={[anchor=west]:\tiny \( \left( 0, 1, 0 \right) \)}] (ybasis) at (0, 1, 0) {};
+        \node[label={[anchor=north west]:\tiny \( \left( 0, 0, 1 \right) \)}] (zbasis) at (0, 0, 1) {};
+
+        \fill[fadegray, opacity=0.5] (xbasis.center) -- (ybasis.center) -- (zbasis.center) -- cycle;
+
+        \fill (xbasis) circle (0.05cm);
+        \fill (ybasis) circle (0.05cm);
+        \fill (zbasis) circle (0.05cm);
+
+        \draw (xbasis.center) -- (ybasis.center);
+        \draw (xbasis.center) -- (zbasis.center);
+        \draw (ybasis.center) -- (zbasis.center);
+
+
+        \draw[->] (0, 0, 0) -- (1.5, 0, 0);
+        \draw[->] (0, 0, 0) -- (0, 1.5, 0);
+        \draw[->] (0, 0, 0) -- (0, 0, 1.5);
+    \end{tikzpicture}
+    \end{minipage}
+    \begin{minipage}{0.24\textwidth}
+    \centering
+    \tdplotsetmaincoords{70}{-90} % 70 -45
+    \begin{tikzpicture}[tdplot_main_coords]
+        \node[label={[anchor=west]:\tiny \( \left( 1, 0, 0 \right) \)}] (xbasis) at (1, 0, 0) {};
+        \node[label={[anchor=south]:\tiny \( \left( 0, 1, 0 \right) \)}] (ybasis) at (0, 1, 0) {};
+        \node[label={[anchor=west]:\tiny \( \left( 0, 0, 1 \right) \)}] (zbasis) at (0, 0, 1) {};
+
+        \fill[fadegray, opacity=0.5] (xbasis.center) -- (ybasis.center) -- (zbasis.center) -- cycle;
+
+        \fill (xbasis) circle (0.05cm);
+        \fill (ybasis) circle (0.05cm);
+        \fill (zbasis) circle (0.05cm);
+
+        \draw (xbasis.center) -- (ybasis.center);
+        \draw (xbasis.center) -- (zbasis.center);
+        \draw (ybasis.center) -- (zbasis.center);
+
+
+        \draw[->] (0, 0, 0) -- (1.5, 0, 0);
+        \draw[->] (0, 0, 0) -- (0, 1.5, 0);
+        \draw[->] (0, 0, 0) -- (0, 0, 1.5);
+    \end{tikzpicture}
+    \end{minipage}
+    \begin{minipage}{0.24\textwidth}
+    \centering
+    \tdplotsetmaincoords{70}{-180} % 70 -45
+    \begin{tikzpicture}[tdplot_main_coords]
+        \node[label={[anchor=south]:\tiny \( \left( 1, 0, 0 \right) \)}] (xbasis) at (1, 0, 0) {};
+        \node[label={[anchor=west]:\tiny \( \left( 0, 1, 0 \right) \)}] (ybasis) at (0, 1, 0) {};
+        \node[label={[anchor=west]:\tiny \( \left( 0, 0, 1 \right) \)}] (zbasis) at (0, 0, 1) {};
+
+        \fill[fadegray, opacity=0.5] (xbasis.center) -- (ybasis.center) -- (zbasis.center) -- cycle;
+
+        \fill (xbasis) circle (0.05cm);
+        \fill (ybasis) circle (0.05cm);
+        \fill (zbasis) circle (0.05cm);
+
+        \draw (xbasis.center) -- (ybasis.center);
+        \draw (xbasis.center) -- (zbasis.center);
+        \draw (ybasis.center) -- (zbasis.center);
+
+
+        \draw[->] (0, 0, 0) -- (1.5, 0, 0);
+        \draw[->] (0, 0, 0) -- (0, 1.5, 0);
+        \draw[->] (0, 0, 0) -- (0, 0, 1.5);
+    \end{tikzpicture}
+    \end{minipage}
+    \begin{minipage}{0.24\textwidth}
+    \centering
+    \tdplotsetmaincoords{70}{-45} % 70 -45
+    \begin{tikzpicture}[tdplot_main_coords]
+        \node[label={[anchor=south]:\tiny \( \left( 1, 0, 0 \right) \)}] (xbasis) at (1, 0, 0) {};
+        \node[label={[anchor=south]:\tiny \( \left( 0, 1, 0 \right) \)}] (ybasis) at (0, 1, 0) {};
+        \node[label={[anchor=east]:\tiny \( \left( 0, 0, 1 \right) \)}] (zbasis) at (0, 0, 1) {};
+
+        \fill[fadegray, opacity=0.5] (xbasis.center) -- (ybasis.center) -- (zbasis.center) -- cycle;
+
+        \fill (xbasis) circle (0.05cm);
+        \fill (ybasis) circle (0.05cm);
+        \fill (zbasis) circle (0.05cm);
+
+        \draw (xbasis.center) -- (ybasis.center);
+        \draw (xbasis.center) -- (zbasis.center);
+        \draw (ybasis.center) -- (zbasis.center);
+
+
+        \draw[->] (0, 0, 0) -- (1.5, 0, 0);
+        \draw[->] (0, 0, 0) -- (0, 1.5, 0);
+        \draw[->] (0, 0, 0) -- (0, 0, 1.5);
+    \end{tikzpicture}
+    \end{minipage}
+    \caption{Different views of a \( 3 \)-simplex.}
+\end{figure}

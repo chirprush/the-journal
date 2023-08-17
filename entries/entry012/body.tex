@@ -182,11 +182,12 @@ of the number. If the \( b \)th bit from the right is \( 1 \), we draw in the
 \begin{blackbox}
     \begin{algorithmic}
         \State \texttt{/*}
-        \State \texttt{\ \ \ We let n denote the number of vertices and b be a value from}
-        \State \texttt{\ \ \ 1 to n(n - 1)/2 representing an edge and a bit in graph number. */}
+        \State \texttt{\ \ \ We let n be the number of vertices and b be a value from 1 to}
+        \State \texttt{\ \ \ n(n - 1)/2 representing an edge and a bit in the graph number.}
+        \State \texttt{*/}
         \Function{GetEdge}{$n, b$} % Bruhhhhhh I seriously have to do this
             \For{\( i \) in \( 1,\ldots,n - 1 \)}
-                \If{\( b \le n - i \)}
+                \If{\( b \leqslant n - i \)}
                     \State \Return \( \set{i, b + i} \)
                 \Else
                     \State \( b \gets b - \left( n - i \right) \)

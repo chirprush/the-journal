@@ -5,6 +5,8 @@
 \newcommand{\abs}[1]{\ensuremath{\left\lvert #1 \right\rvert}}
 \newcommand{\floor}[1]{\ensuremath{\left\lfloor #1 \right\rfloor}}
 \newcommand{\bounds}[3]{\ensuremath{\left. \rule{0pt}{10pt} #1 \: \right\vert_{#2}^{#3}}}
+
+% Log denoting the principal branch of the complex logarithm
 \DeclareMathOperator{\Log}{Log}
 \DeclareMathOperator{\Arg}{Arg}
 
@@ -14,6 +16,15 @@
 \DeclareMathOperator{\arccot}{arccot}
 \DeclareMathOperator{\arccsc}{arccsc}
 
+% It seems these are already defined
 % Not really sure whether standard serif is better than frakture but we'll see.
-\renewcommand{\Re}{\ensuremath{\operatorname{\mathfrak{Re}}}}
-\renewcommand{\Im}{\ensuremath{\operatorname{\mathfrak{Im}}}}
+% \DeclareMathOperator{\Re}{\mathfrak{Re}}
+% \DeclareMathOperator{\Im}{\mathfrak{Im}}
+
+\DeclareMathOperator{\LaplaceL}{\mathscr{L}}
+\DeclareMathOperator{\InvLaplaceL}{\mathscr{L}^{-1}}
+\newcommand{\Laplace}[1]{\ensuremath{\LaplaceL \left\{ #1 \right\} \left( s \right)}}
+\newcommand{\InvLaplace}[1]{\ensuremath{\InvLaplaceL \left\{ #1 \right\} \left( t \right)}}
+
+\DeclareMathOperator{\Heaviside}{H}
+\DeclareMathOperator{\Rect}{\Pi}
