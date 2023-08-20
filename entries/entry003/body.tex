@@ -39,14 +39,14 @@ For vectors \( \bvec{u} \), \( \bvec{v} \), and \( \bvec{w} \),
 \begin{tikzpicture}[node distance=4cm]
     \node (lhs) { \(
         \begin{aligned}
-            \R \point{\bvec{u}} = \point{\bvec{u'}}
+            \R \point{\bvec{u}} = \point{\bvec{u}'}
         \end{aligned}
     \) };
     \node[right=of lhs] (rhs) { \(
         \begin{aligned}
-             R_{1,1} \bvec{u}_1 + R_{1,2} \bvec{u}_2 + R_{1,3} \bvec{u}_3 &= \bvec{u'}_1 \\
-             R_{2,1} \bvec{u}_1 + R_{2,2} \bvec{u}_2 + R_{2,3} \bvec{u}_3 &= \bvec{u'}_2 \\
-             R_{3,1} \bvec{u}_1 + R_{3,2} \bvec{u}_2 + R_{3,3} \bvec{u}_3 &= \bvec{u'}_3
+             R_{1,1} \bvec{u}_1 + R_{1,2} \bvec{u}_2 + R_{1,3} \bvec{u}_3 &= \bvec{u}'_1 \\
+             R_{2,1} \bvec{u}_1 + R_{2,2} \bvec{u}_2 + R_{2,3} \bvec{u}_3 &= \bvec{u}'_2 \\
+             R_{3,1} \bvec{u}_1 + R_{3,2} \bvec{u}_2 + R_{3,3} \bvec{u}_3 &= \bvec{u}'_3
         \end{aligned}
     \) };
     \draw[->, semithick] (lhs.east) -- (rhs.west);
@@ -55,14 +55,14 @@ For vectors \( \bvec{u} \), \( \bvec{v} \), and \( \bvec{w} \),
 \begin{tikzpicture}[node distance=4cm]
     \node (lhs) { \(
         \begin{aligned}
-            \R \point{\bvec{v}} = \point{\bvec{v'}}
+            \R \point{\bvec{v}} = \point{\bvec{v}'}
         \end{aligned}
     \) };
     \node[right=of lhs] (rhs) { \(
         \begin{aligned}
-             R_{1,1} \bvec{v}_1 + R_{1,2} \bvec{v}_2 + R_{1,3} \bvec{v}_3 &= \bvec{v'}_1 \\
-             R_{2,1} \bvec{v}_1 + R_{2,2} \bvec{v}_2 + R_{2,3} \bvec{v}_3 &= \bvec{v'}_2 \\
-             R_{3,1} \bvec{v}_1 + R_{3,2} \bvec{v}_2 + R_{3,3} \bvec{v}_3 &= \bvec{v'}_3
+             R_{1,1} \bvec{v}_1 + R_{1,2} \bvec{v}_2 + R_{1,3} \bvec{v}_3 &= \bvec{v}'_1 \\
+             R_{2,1} \bvec{v}_1 + R_{2,2} \bvec{v}_2 + R_{2,3} \bvec{v}_3 &= \bvec{v}'_2 \\
+             R_{3,1} \bvec{v}_1 + R_{3,2} \bvec{v}_2 + R_{3,3} \bvec{v}_3 &= \bvec{v}'_3
         \end{aligned}
     \) };
     \draw[->, semithick] (lhs.east) -- (rhs.west);
@@ -71,14 +71,14 @@ For vectors \( \bvec{u} \), \( \bvec{v} \), and \( \bvec{w} \),
 \begin{tikzpicture}[node distance=4cm]
     \node (lhs) { \(
         \begin{aligned}
-            \R \point{\bvec{w}} = \point{\bvec{w'}}
+            \R \point{\bvec{w}} = \point{\bvec{w}'}
         \end{aligned}
     \) };
     \node[right=of lhs] (rhs) { \(
         \begin{aligned}
-             R_{1,1} \bvec{w}_1 + R_{1,2} \bvec{w}_2 + R_{1,3} \bvec{w}_3 &= \bvec{w'}_1 \\
-             R_{2,1} \bvec{w}_1 + R_{2,2} \bvec{w}_2 + R_{2,3} \bvec{w}_3 &= \bvec{w'}_2 \\
-             R_{3,1} \bvec{w}_1 + R_{3,2} \bvec{w}_2 + R_{3,3} \bvec{w}_3 &= \bvec{w'}_3
+             R_{1,1} \bvec{w}_1 + R_{1,2} \bvec{w}_2 + R_{1,3} \bvec{w}_3 &= \bvec{w}'_1 \\
+             R_{2,1} \bvec{w}_1 + R_{2,2} \bvec{w}_2 + R_{2,3} \bvec{w}_3 &= \bvec{w}'_2 \\
+             R_{3,1} \bvec{w}_1 + R_{3,2} \bvec{w}_2 + R_{3,3} \bvec{w}_3 &= \bvec{w}'_3
         \end{aligned}
     \) };
     \draw[->, semithick] (lhs.east) -- (rhs.west);
@@ -94,14 +94,14 @@ Notice now that we have three relations for each three rows of coefficients in \
 \begin{tikzpicture}[node distance=4cm]
     \node (lhs) { \(
         \begin{aligned}
-            R_{1,1} \bvec{u}_1 + R_{1,2} \bvec{u}_2 + R_{1,3} \bvec{u}_3 &= \bvec{u'}_1 \\
-            R_{1,1} \bvec{v}_1 + R_{1,2} \bvec{v}_2 + R_{1,3} \bvec{v}_3 &= \bvec{v'}_1 \\
-            R_{1,1} \bvec{w}_1 + R_{1,2} \bvec{w}_2 + R_{1,3} \bvec{w}_3 &= \bvec{w'}_1
+            R_{1,1} \bvec{u}_1 + R_{1,2} \bvec{u}_2 + R_{1,3} \bvec{u}_3 &= \bvec{u}'_1 \\
+            R_{1,1} \bvec{v}_1 + R_{1,2} \bvec{v}_2 + R_{1,3} \bvec{v}_3 &= \bvec{v}'_1 \\
+            R_{1,1} \bvec{w}_1 + R_{1,2} \bvec{w}_2 + R_{1,3} \bvec{w}_3 &= \bvec{w}'_1
         \end{aligned}
     \) };
     \node[right=of lhs] (rhs) { \(
         \begin{aligned}
-            \A \pointsub{R}{1} = \point{\bvec{u'}}
+            \A \pointsub{R}{1} = \point{\bvec{u}'}
         \end{aligned}
     \) };
     \draw[->, semithick] (lhs.east) -- (rhs.west);
@@ -110,14 +110,14 @@ Notice now that we have three relations for each three rows of coefficients in \
 \begin{tikzpicture}[node distance=4cm]
     \node (lhs) { \(
         \begin{aligned}
-            R_{2,1} \bvec{u}_1 + R_{2,2} \bvec{u}_2 + R_{2,3} \bvec{u}_3 &= \bvec{u'}_2 \\
-            R_{2,1} \bvec{v}_1 + R_{2,2} \bvec{v}_2 + R_{2,3} \bvec{v}_3 &= \bvec{v'}_2 \\
-            R_{2,1} \bvec{w}_1 + R_{2,2} \bvec{w}_2 + R_{2,3} \bvec{w}_3 &= \bvec{w'}_2
+            R_{2,1} \bvec{u}_1 + R_{2,2} \bvec{u}_2 + R_{2,3} \bvec{u}_3 &= \bvec{u}'_2 \\
+            R_{2,1} \bvec{v}_1 + R_{2,2} \bvec{v}_2 + R_{2,3} \bvec{v}_3 &= \bvec{v}'_2 \\
+            R_{2,1} \bvec{w}_1 + R_{2,2} \bvec{w}_2 + R_{2,3} \bvec{w}_3 &= \bvec{w}'_2
         \end{aligned}
     \) };
     \node[right=of lhs] (rhs) { \(
         \begin{aligned}
-            \A \pointsub{R}{2} = \point{\bvec{u'}}
+            \A \pointsub{R}{2} = \point{\bvec{u}'}
         \end{aligned}
     \) };
     \draw[->, semithick] (lhs.east) -- (rhs.west);
@@ -126,14 +126,14 @@ Notice now that we have three relations for each three rows of coefficients in \
 \begin{tikzpicture}[node distance=4cm]
     \node (lhs) { \(
         \begin{aligned}
-            R_{3,1} \bvec{u}_1 + R_{3,2} \bvec{u}_2 + R_{3,3} \bvec{u}_3 &= \bvec{u'}_3 \\
-            R_{3,1} \bvec{v}_1 + R_{3,2} \bvec{v}_2 + R_{3,3} \bvec{v}_3 &= \bvec{v'}_3 \\
-            R_{3,1} \bvec{w}_1 + R_{3,2} \bvec{w}_2 + R_{3,3} \bvec{w}_3 &= \bvec{w'}_3
+            R_{3,1} \bvec{u}_1 + R_{3,2} \bvec{u}_2 + R_{3,3} \bvec{u}_3 &= \bvec{u}'_3 \\
+            R_{3,1} \bvec{v}_1 + R_{3,2} \bvec{v}_2 + R_{3,3} \bvec{v}_3 &= \bvec{v}'_3 \\
+            R_{3,1} \bvec{w}_1 + R_{3,2} \bvec{w}_2 + R_{3,3} \bvec{w}_3 &= \bvec{w}'_3
         \end{aligned}
     \) };
     \node[right=of lhs] (rhs) { \(
         \begin{aligned}
-            \A \pointsub{R}{3} = \point{\bvec{u'}}
+            \A \pointsub{R}{3} = \point{\bvec{u}'}
         \end{aligned}
     \) };
     \draw[->, semithick] (lhs.east) -- (rhs.west);
@@ -144,7 +144,7 @@ matrix \( A \). The great thing about this operation is that we only really
 need to find the inverse of one matrix, namely \( A^{-1} \). Doing so, we
 finally get a way to calculate the coefficients in \( R \) in terms of our vectors \( \bvec{u} \), \( \bvec{v} \), and \( \bvec{w} \) as such:
 \[
-    \pointsub{R}{1} = A^{-1} \point{\bvec{u'}}, \qquad \pointsub{R}{2} = A^{-1} \point{\bvec{v'}}, \qquad \pointsub{R}{3} = A^{-1} \point{\bvec{w'}} 
+    \pointsub{R}{1} = A^{-1} \point{\bvec{u}'}, \qquad \pointsub{R}{2} = A^{-1} \point{\bvec{v}'}, \qquad \pointsub{R}{3} = A^{-1} \point{\bvec{w}'} 
 \]
 \endgroup
 

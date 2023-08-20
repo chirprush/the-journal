@@ -1,8 +1,11 @@
 \newcommand{\set}[1]{\ensuremath{\left\{ #1 \right\}}}
 
-\newcommand{\bvec}[1]{\ensuremath{\mathbf{#1}}}
+% Perhaps it truly is redundant and nonstandard, but I like both the bold and
+% the overhead arrow symbols for vectors.
+\newcommand{\bvec}[1]{\ensuremath{\mathbf{\vec{#1}}}}
 \newcommand{\conj}[1]{\ensuremath{\overline{#1}}}
 \newcommand{\abs}[1]{\ensuremath{\left\lvert #1 \right\rvert}}
+\newcommand{\norm}[1]{\ensuremath{\left\lVert #1 \right\rVert}}
 \newcommand{\floor}[1]{\ensuremath{\left\lfloor #1 \right\rfloor}}
 \newcommand{\bounds}[3]{\ensuremath{\left. \rule{0pt}{10pt} #1 \: \right\vert_{#2}^{#3}}}
 
@@ -28,3 +31,12 @@
 
 \DeclareMathOperator{\Heaviside}{H}
 \DeclareMathOperator{\Rect}{\Pi}
+
+\newcommand{\distributed}{\ensuremath{\sim}}
+\newcommand{\convolution}{\ensuremath{*}}
+
+\DeclareMathOperator{\ProbabilityP}{P}
+\newcommand{\Prob}[1]{\ensuremath{\ProbabilityP \left( #1 \right)}}
+
+\DeclareMathOperator{\UniformDist}{Uniform}
+\newcommand{\Uniform}[2]{\ensuremath{\UniformDist \left( #1, #2 \right)}}
