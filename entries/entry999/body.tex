@@ -1,0 +1,96 @@
+Oh boy it has been quite a while since I've been able to write in the math
+journal, hasn't it? Junior year is going decently swimmingly but the work load
+is certainly not as merciful and liberal as last year unfortunately. Even
+still, I can probably find the time to come back here every now and again, but
+I might not \MarginComment{Although, I think my writing skills will certainly
+advance as the year goes on so perhaps I may turn to this for creative writing
+practice.} be able to write long entries too often.
+
+As such, I've thought it would be a nice idea to have a place to curate some
+less developed but perhaps expandable and fun math thoughts that I have
+throughout the day. This way, I won't get as rusty and I can get into the habit
+of writing some things down. These can also serve as things I can turn into
+full fledged journal entries. Fun!
+
+\begin{itemize}
+    \item It would be fun to experiment and see what breaks in probability
+        theory if we were to allow for negative pdfs. Leaving physical
+        interpretation aside, it may have some sort of use. In general, I do
+        want to explore measure theoretic and formal probability theory more,
+        but it might take a while to learn.
+        
+    \item This probably isn't useful but suppse \( P(x) \) is a polynomial of
+        degree \( n \) with all coefficients in \( [0, 1] \). We then have
+        \[
+            P(x)^2 \leqslant n \frac{x^{2n + 2} - 1}{x^2 - 1}
+        .\]
+
+    \item A while ago when I was sick, I was exploring orthogonal
+        polynomials/other functions in an effort to answer a (rather
+        subjective) question on whether sound necessarily had to be like it is
+        in real life \MarginComment{As a side note, I do also want to write a
+        whole exposition on the math behind music and sound perhaps for an
+        orchestra project.}. Certainly for polynomials I don't think they play well
+        enough compared to waves in order to them to work, but it was a shot.
+        Perhaps some other family of functions may work.
+        \begin{blackbox}
+            For any infinite set of orthogonal functions \( \mathcal{O} = \{ P_0 (x), P_1(x), \ldots \} \) and any function \( f \),
+            \[
+                f(x) \approx \sum_{n = 0}^\infty \frac{a_n}{w_n} P_n (x)
+            ,\]
+            where
+            \begin{align*}
+                &a_n = \int_{-L}^{L} f(t) P_n (t) \, dt,
+                & w_n = \int_{-L}^{L} \left( P_n (t) \right)^2 \, dt
+            \end{align*}
+        \end{blackbox}
+
+    \item I really should turn the (semi) gradient noise program into a journal
+        entry because it's simple math that turns into cool looking art. That
+        being said, it isn't really true gradient noise.
+
+    \item Speaking of things to put in the journal, the baby derangements
+        problem from stats class is like already done \MarginComment{Note:
+        include the limit Max talked about because its funny.} and ready to
+        just be like tweaked and put in. I really just need to get around to
+        doing it.
+
+    \item I really want to get into inequalities and formal set theory more
+        because ARML has shown me that they're really cool. In general, I think
+        it'd also be nice to do a lot more proof style stuff in the journal
+        because I'm lacking experience with the rigor.
+
+    \item I should look back at the problem of finding "closed forms" for
+        \[
+            \sum_{k = 0}^{\infty} \frac{x^k}{(nk)!}
+        .\]
+        I believe it would also be nice to show binomial multiple sums
+        \MarginComment{Future me will probably know what this is talking about.}
+        using a similar technique.
+
+    \item I really excited to write about the restricted random walk problem I
+        showed Lester as it has some really cool physical implications; I just
+        need the time. This is so sad. (As a side note I really like how I set
+        up the \LaTeX\ formatting for that so in case I ever need something to
+        steal I might as well go with that).
+
+    \item I should get back to the graph theory stuff sometime. Likely the
+        thing that will keep me interested is the one neighbor derangements
+        problem.
+
+    \item Let
+        \[
+            Y = \sum_{k = 1}^{N} X_k
+        ,\]
+        where \( X_1, X_2, \ldots, X_N \sim \textsf{Uniform}(0, r) \) are i.i.d. The probabilitiy density function for \( Y \) is
+        \[
+            f_Y (t) = \frac{1}{r^n (n-1)!} \sum_{k = 0}^{N} \binom{N}{k} (-1)^k (t - rk)^{N - 1} H(t - rk)
+        ,\]
+        where \( H(t) \) denotes the Heaviside step function.
+
+    \item Oh yeah I just remembered the one simplex probability problem journal
+        entry still exists. Hopefully that gets completed by the end of the
+        year.
+
+    \item Suppose \( X_0 \sim \textsf{Uniform} (0, 1) \) and \( X_n \sim \textsf{Uniform} (0, X_0) \). Then \( \mathrm{E} (X_n) = 1/n! \).
+\end{itemize}
